@@ -57,6 +57,7 @@
 
 						fichaFileName = file.name;
 						ficha = { ...parsedFicha } as Ficha;
+						loadedFicha = { ...parsedFicha };
 					})
 					.catch((reason) => window.alert(reason));
 			}
