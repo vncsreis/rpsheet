@@ -3,9 +3,32 @@
 	import { Icon, Pencil, Trash } from 'svelte-hero-icons';
 	import ModalConfirm from '../ui/modals/modalConfirm.svelte';
 	import ModalPericia from '../ui/modals/modalPericia.svelte';
+	import { toTooltip } from '#lib/modificadores.svelte.ts';
 
 	function removePericia(periciaIndex: number) {
 		globalFicha.ficha.pericias.splice(periciaIndex, 1);
+	}
+
+	function handleOutros(pericia: { id: string; penalidade: boolean; nome: string }) {
+		let mods = globalFicha.getMods(pericia.id);
+		let tooltipMessage = toTooltip(mods.mods);
+
+		if (pericia.penalidade) {
+			const { penalidade: penalidadeArmadura } = globalFicha.ficha.armadura;
+			const { penalidade: penalidadeEscudo } = globalFicha.ficha.escudo;
+
+			if (penalidadeArmadura > 0) {
+				mods.total -= penalidadeArmadura;
+				tooltipMessage = tooltipMessage + ` Armadura (-${penalidadeArmadura}`;
+			}
+
+			if (penalidadeEscudo > 0) {
+				mods.total -= penalidadeEscudo;
+				tooltipMessage = tooltipMessage + ` Escudo (-${penalidadeEscudo}`;
+			}
+		}
+
+		return { total: mods.total, tooltipMessage };
 	}
 </script>
 
@@ -19,7 +42,6 @@
 
 <!-- TODO: interagir com penalidade de armadura -->
 <!-- TODO: lidar com as que precisam de treinamento -->
-<!-- TODO: plugar com talentos -->
 <legend class="mb-4 font-bold">Perícias</legend>
 <div class="w-full max-w-full overflow-x-auto">
 	<table
@@ -54,8 +76,9 @@
 					{@render periciaNumberField(grad)}
 					{@render periciaNumberField(globalFicha.getModHab(pericia.hab), pericia.hab)}
 					<td>
-						<div data-tip="mods" class="tooltip">
-							<input class=" input max-w-18 input-sm" type="number" value={0} readonly />
+						{const { total, tooltipMessage } = handleOutros(pericia)}
+						<div data-tip={tooltipMessage} class="tooltip">
+							<input class=" input max-w-18 input-sm" type="number" value={total} readonly />
 						</div>
 					</td>
 					<td>
