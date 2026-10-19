@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { globalFicha } from '#lib/ficha.svelte.ts';
+	import { globalFicha, type Tamanhos } from '#lib/ficha.svelte.ts';
 	import { AcademicCap, Icon, Pencil, Trash } from 'svelte-hero-icons';
 	import ModalConfirm from '../ui/modals/modalConfirm.svelte';
 	import ModalPericia from '../ui/modals/modalPericia.svelte';
@@ -25,6 +25,23 @@
 			if (penalidadeEscudo > 0) {
 				mods.total -= penalidadeEscudo;
 				tooltipMessage = tooltipMessage + ` Escudo (-${penalidadeEscudo});`;
+			}
+		}
+
+		if (pericia.id === 'furtividade') {
+			switch (globalFicha.ficha.info.tamanho as Tamanhos) {
+				case 'Pequeno':
+					mods.total += 4;
+					tooltipMessage = tooltipMessage + ' Pequeno (+4);';
+					break;
+				case 'Grande':
+					mods.total -= 4;
+					tooltipMessage = tooltipMessage + ' Grande (-4);';
+					break;
+				case 'Enorme':
+					mods.total -= 8;
+					tooltipMessage = tooltipMessage + ' Enorme (-8);';
+					break;
 			}
 		}
 
@@ -89,7 +106,11 @@
 					{@render periciaNumberField(grad, pericia)}
 					{@render periciaNumberField(globalFicha.getModHab(pericia.hab), pericia, true)}
 					<td>
-						{const { total, tooltipMessage } = handleOutros(pericia)}
+						{const { total, tooltipMessage } = $derived.by(() => {
+							if (globalFicha.ficha.info) {
+								return handleOutros(pericia);
+							}
+						})}
 						<div data-tip={tooltipMessage} class="tooltip">
 							<input
 								class=" input max-w-18 input-sm"

@@ -1,4 +1,7 @@
-import type { Ficha, Modificadores } from './ficha.interface';
+import type { Ficha } from './ficha.interface';
+
+export const TAMANHOS = ['Pequeno', 'Médio', 'Grande', 'Enorme'];
+export type Tamanhos = (typeof TAMANHOS)[number];
 
 export const NOVA_FICHA: Ficha = {
 	info: {
@@ -205,7 +208,8 @@ export const NOVA_FICHA: Ficha = {
 	},
 	magias: [],
 	inventario: [],
-	status: []
+	status: [],
+	anotacoes: ''
 };
 
 export const FICHA: Ficha = {

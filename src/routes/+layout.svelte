@@ -75,7 +75,7 @@
 	}
 
 	$effect(() => {
-		if (globalFicha.ficha.pericias) {
+		if (globalFicha.ficha && globalFicha.ficha.pericias) {
 			for (const pericia of globalFicha.ficha.pericias) {
 				if (!MODS.includes(pericia.id)) {
 					MODS.push(pericia.id);

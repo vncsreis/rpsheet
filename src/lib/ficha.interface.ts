@@ -1,6 +1,5 @@
+import type { Tamanhos } from './ficha.svelte';
 import type { Habilidade } from './habilidades';
-
-export type Tamanho = 'Pequeno' | 'Médio' | 'Grande' | '';
 
 export interface Modificadores {
 	tipo: string;
@@ -15,7 +14,7 @@ export interface Ficha {
 		sexo: string;
 		idade: number;
 		divindade: string;
-		tamanho: Tamanho;
+		tamanho: Tamanhos;
 		dinheiro: number;
 	};
 	deslocamento: {
@@ -103,4 +102,5 @@ export interface Ficha {
 		requerAtivacao?: boolean;
 		ativo?: boolean;
 	}[];
+	anotacoes?: string;
 }
