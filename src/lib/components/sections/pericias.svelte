@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { Icon, Pencil, Trash } from 'svelte-hero-icons';
+	import { AcademicCap, Icon, Pencil, Trash } from 'svelte-hero-icons';
 	import ModalConfirm from '../ui/modals/modalConfirm.svelte';
 	import ModalPericia from '../ui/modals/modalPericia.svelte';
 	import { toTooltip } from '#lib/modificadores.svelte.ts';
@@ -32,10 +32,18 @@
 	}
 </script>
 
-{#snippet periciaNumberField(value: number, hab: string = null)}
+{#snippet periciaNumberField(
+	value: number,
+	{ treinada, treinamento, hab }: { treinada: boolean; treinamento: boolean; hab: string },
+	showTooltip = false
+)}
 	<td>
-		<div data-tip={hab ? hab.toUpperCase() : null} class={hab ? 'tooltip' : ''}>
-			<input class=" input max-w-18 input-sm" type="number" {value} readonly />
+		<div data-tip={hab ? hab.toUpperCase() : null} class={showTooltip ? 'tooltip' : ''}>
+			{#if treinamento && !treinada}
+				<input class=" input max-w-18 input-sm" type="number" {value} disabled />
+			{:else}
+				<input class=" input max-w-18 input-sm" type="number" {value} readonly />
+			{/if}
 		</div>
 	</td>
 {/snippet}
@@ -64,7 +72,12 @@
 					pericia.treinada ? globalFicha.nivel + 3 : Math.floor(globalFicha.nivel / 2)
 				)}
 				<tr>
-					<td class="max-w-18"><input type="checkbox" bind:checked={pericia.treinada} /></td>
+					<td class="flex max-w-18 items-center gap-2"
+						><input class="checkbox" type="checkbox" bind:checked={pericia.treinada} />
+						{#if pericia.treinamento}
+							<Icon src={AcademicCap} size="18" />
+						{/if}
+					</td>
 					<td
 						><input
 							class="input min-w-32 input-sm"
@@ -72,13 +85,19 @@
 							bind:value={globalFicha.ficha.pericias[i].nome}
 						/></td
 					>
-					{@render periciaNumberField(grad + globalFicha.getModHab(pericia.hab))}
-					{@render periciaNumberField(grad)}
-					{@render periciaNumberField(globalFicha.getModHab(pericia.hab), pericia.hab)}
+					{@render periciaNumberField(grad + globalFicha.getModHab(pericia.hab), pericia)}
+					{@render periciaNumberField(grad, pericia)}
+					{@render periciaNumberField(globalFicha.getModHab(pericia.hab), pericia, true)}
 					<td>
 						{const { total, tooltipMessage } = handleOutros(pericia)}
 						<div data-tip={tooltipMessage} class="tooltip">
-							<input class=" input max-w-18 input-sm" type="number" value={total} readonly />
+							<input
+								class=" input max-w-18 input-sm"
+								type="number"
+								value={total}
+								readonly
+								disabled={pericia.treinamento && !pericia.treinada}
+							/>
 						</div>
 					</td>
 					<td>
