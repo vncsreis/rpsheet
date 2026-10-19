@@ -1,16 +1,20 @@
-import { getLabel } from './labels';
-
-export const MODS = [
+const _MODS = [
 	'fortitude',
 	'reflexos',
 	'vontade',
 	'ca',
 	'ataque',
 	'ataque_corpo',
-	'ataque_distancia'
-].sort((a, b) => (getLabel(a) > getLabel(b) ? 1 : -1));
+	'ataque_distancia',
+	'for',
+	'des',
+	'car',
+	'int',
+	'sab',
+	'con'
+];
 
-export type Modificador = (typeof MODS)[number];
+export let MODS = $state(_MODS);
 
 export function toTooltip(mods: { nome: string; valor: number }[]) {
 	return mods.reduce((acc, mod) => {

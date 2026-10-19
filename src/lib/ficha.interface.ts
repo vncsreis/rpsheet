@@ -1,10 +1,9 @@
-import { Habilidade } from './habilidades';
-import { Modificador } from './modificadores';
+import type { Habilidade } from './habilidades';
 
 export type Tamanho = 'Pequeno' | 'Médio' | 'Grande' | '';
 
 export interface Modificadores {
-	tipo: Modificador;
+	tipo: string;
 	valor: number;
 }
 

@@ -6,7 +6,7 @@ export function getLabel(id: string) {
 	}
 }
 
-export const LABELS: Record<string, { name: string; type?: string }> = {
+export let LABELS = $state<Record<string, { name: string; type?: string }>>({
 	nome: {
 		name: 'Nome',
 		type: 'text'
@@ -134,4 +134,4 @@ export const LABELS: Record<string, { name: string; type?: string }> = {
 	car: {
 		name: 'Carisma'
 	}
-};
+});
