@@ -65,8 +65,6 @@
 	</td>
 {/snippet}
 
-<!-- TODO: interagir com penalidade de armadura -->
-<!-- TODO: lidar com as que precisam de treinamento -->
 <legend class="mb-4 font-bold">Perícias</legend>
 <div class="w-full max-w-full overflow-x-auto">
 	<table

@@ -676,7 +676,6 @@ export class FichaState {
 	get caTotal() {
 		const { armadura, escudo } = this.ficha;
 
-		// adicionar magias e poções no cálculo
 		return (
 			10 +
 			Math.floor(this.nivel / 2) +

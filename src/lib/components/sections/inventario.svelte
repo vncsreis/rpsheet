@@ -9,7 +9,6 @@
 	}
 </script>
 
-<!-- TODO: tamanho como select ?? -->
 <fieldset class="flex flex-col flex-wrap rounded-md border-2 border-base-300 bg-base-100 p-6">
 	<legend class="font-bold">Inventário</legend>
 	<div class="flex flex-col gap-4">
