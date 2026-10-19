@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { globalFicha } from '#lib/ficha.svelte.ts';
+	import { globalFicha, type Tamanhos } from '#lib/ficha.svelte.ts';
 	import { toTooltip } from '#lib/modificadores.svelte.ts';
 </script>
 
 {#snippet caField(label: string, value: number)}
 	<label
 		class="floating-label flex min-w-24 {label === 'Outros' ? 'tooltip' : ''}"
-		data-tip={label === 'Outros' ? toTooltip(globalFicha.getMods('ca').mods) : null}
+		data-tip={label === 'Outros'
+			? toTooltip(globalFicha.getMods('ca').mods) + globalFicha.modTamanhoCa.tooltipMessage
+			: null}
 	>
 		<span class="text-lg">{label}</span>
 		<input
@@ -37,8 +39,8 @@
 			{@render caField('Mod. de Habilidade', globalFicha.modHabDes)}
 			{@render caField('Bônus de Armadura', globalFicha.ficha.armadura.bonus_ca)}
 			{@render caField('Bônus de Escudo', globalFicha.ficha.escudo.bonus_ca)}
-			{@render caField('Mod. de Tamanho', globalFicha.modTamanho)}
-			{@render caField('Outros', globalFicha.getMods('ca').total)}
+			{@render caField('Mod. de Tamanho', globalFicha.modTamanhoCa.valor)}
+			{@render caField('Outros', globalFicha.getMods('ca').total + globalFicha.modTamanhoCa.valor)}
 		</div>
 	</div>
 </fieldset>

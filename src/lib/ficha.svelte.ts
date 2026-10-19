@@ -657,19 +657,20 @@ export class FichaState {
 		return { total, mods: [...talentos, ...magias, ...inventario, ...status] };
 	}
 
-	get modTamanho() {
+	get modTamanhoCa() {
 		const { tamanho } = this.ficha.info;
 
-		let modTamanho = 0;
-
 		// Adicionar outros tamanhos
-		switch (tamanho.toLowerCase()) {
-			case 'pequeno':
-				modTamanho = 1;
-				break;
+		switch (tamanho) {
+			case 'Pequeno':
+				return { valor: 1, tooltipMessage: ' Pequeno (+1)' };
+			case 'Grande':
+				return { valor: -1, tooltipMessage: ' Grande (-1);' };
+			case 'Enorme':
+				return { valor: -2, tooltipMessage: ' Enorme (-2);' };
+			default:
+				return { valor: 0, tooltipMessage: '' };
 		}
-
-		return modTamanho;
 	}
 
 	get caTotal() {
@@ -682,7 +683,7 @@ export class FichaState {
 			this.modHabDes +
 			armadura.bonus_ca +
 			escudo.bonus_ca +
-			this.modTamanho +
+			this.modTamanhoCa.valor +
 			this.getMods('ca').total
 		);
 	}
@@ -691,8 +692,8 @@ export class FichaState {
 		const { bba } = this.ficha;
 
 		return {
-			corpo: bba + this.getModHab('for') + this.modTamanho,
-			distancia: bba + this.modHabDes + this.modTamanho
+			corpo: bba + this.getModHab('for') + this.modTamanhoCa.valor,
+			distancia: bba + this.modHabDes + this.modTamanhoCa.valor
 		};
 	}
 

@@ -28,8 +28,16 @@
 			</tr>
 			<tr>
 				<td>Mod. Tamanho</td>
-				<td>{globalFicha.modTamanho}</td>
-				<td>{globalFicha.modTamanho}</td>
+				<td>
+					<div class="tooltip" data-tip={globalFicha.modTamanhoCa.tooltipMessage}>
+						{globalFicha.modTamanhoCa.valor}
+					</div>
+				</td>
+				<td>
+					<div class="tooltip" data-tip={globalFicha.modTamanhoCa.tooltipMessage}>
+						{globalFicha.modTamanhoCa.valor}
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Outros</td>

@@ -64,7 +64,7 @@
 		{/each}
 	</div>
 
-	<div class="ml-auto">
+	<div class="ml-auto flex flex-nowrap gap-2">
 		<button class="btn ml-auto btn-circle" onclick={addArma}><Icon src={Plus} size="20" /></button>
 		<button onclick={() => removeArma(selectedArmaIndex)} class="btn btn-circle"
 			><Icon src={Trash} size="20" /></button

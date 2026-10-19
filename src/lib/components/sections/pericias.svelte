@@ -70,7 +70,7 @@
 <legend class="mb-4 font-bold">Perícias</legend>
 <div class="w-full max-w-full overflow-x-auto">
 	<table
-		class="table table-pin-rows table-pin-cols mx-8 mb-4 max-w-full rounded-md border border-base-content/5 table-zebra bg-base-100 table-xs"
+		class="table table-pin-rows table-pin-cols mx-4 mb-4 max-w-full rounded-md border border-base-content/5 table-zebra bg-base-100 table-xs"
 	>
 		<thead>
 			<tr>
@@ -121,7 +121,7 @@
 							/>
 						</div>
 					</td>
-					<td>
+					<td class="flex flex-nowrap gap-2">
 						<button
 							class="btn btn-circle btn-sm"
 							onclick={() =>

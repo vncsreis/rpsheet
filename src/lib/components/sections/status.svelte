@@ -52,7 +52,7 @@
 						/>
 					{/if}
 				</div>
-				<div>
+				<div class="flex flex-nowrap gap-2">
 					<button
 						class="btn btn-circle btn-sm"
 						onclick={() =>

@@ -10,6 +10,10 @@
 
 	// TODO: unir pmsPreparado no handleUsoMagia
 	let pmsPreparados = $derived.by(() => {
+		if (!globalFicha.ficha.prepararMagias) {
+			return 0;
+		}
+
 		return globalFicha.ficha.magias.reduce((acc, magia) => {
 			const pm = magia.nivel * magia.usos;
 
@@ -50,6 +54,14 @@
 			.filter((i) => i !== magiaIndex)
 			.map((i) => (i > magiaIndex ? i - 1 : i));
 	}
+
+	$effect(() => {
+		if (!globalFicha.ficha.prepararMagias) {
+			for (const magia of globalFicha.ficha.magias) {
+				magia.usos = 0;
+			}
+		}
+	});
 </script>
 
 <fieldset
@@ -58,17 +70,25 @@
 	<legend class="font-bold">Magias</legend>
 	<fieldset class="flex flex-row rounded-md border border-base-300 p-4">
 		<legend class="font-bold">PM</legend>
-		<div class="flex flex-row">
-			{#each Object.keys(globalFicha.ficha.pm) as k (k)}
-				<label class="floating-label m-2 flex flex-col">
-					<span class="text-lg">{getLabel(k)}</span>
-					<input type="number" class="input" bind:value={globalFicha.ficha.pm[k]} />
-				</label>
-			{/each}
-			<label class="floating-label m-2 flex flex-col">
-				<span class="text-lg">Preparados</span>
-				<input type="number" class="input" value={pmsPreparados} readonly />
-			</label>
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-row">
+				{#each Object.keys(globalFicha.ficha.pm) as k (k)}
+					<label class="floating-label m-2 flex flex-col">
+						<span class="text-lg">{getLabel(k)}</span>
+						<input type="number" class="input" bind:value={globalFicha.ficha.pm[k]} />
+					</label>
+				{/each}
+				{#if globalFicha.ficha.prepararMagias}
+					<label class="floating-label m-2 flex flex-col">
+						<span class="text-lg">Preparados</span>
+						<input type="number" class="input" value={pmsPreparados} readonly />
+					</label>
+				{/if}
+			</div>
+			<div class="flex flex-row items-center gap-2">
+				<input type="checkbox" class="checkbox" bind:checked={globalFicha.ficha.prepararMagias} />
+				<span>Magias preparadas</span>
+			</div>
 		</div>
 	</fieldset>
 	{#each globalFicha.ficha.magias as magia, i (i)}
@@ -124,14 +144,16 @@
 					</div>
 					<div class="flex flex-row items-center"></div>
 					<p class="text-md rounded-md p-2">{globalFicha.ficha.magias[i].descr}</p>
-					<label class="floating-label m-2 flex flex-col">
-						<span class="text-lg">Usos</span>
-						<input
-							type="number"
-							class="input"
-							bind:value={() => globalFicha.ficha.magias[i].usos, (v) => handleUsoMagia(i, v)}
-						/>
-					</label>
+					{#if globalFicha.ficha.prepararMagias}
+						<label class="floating-label m-2 flex flex-col">
+							<span class="text-lg">Usos</span>
+							<input
+								type="number"
+								class="input"
+								bind:value={() => globalFicha.ficha.magias[i].usos, (v) => handleUsoMagia(i, v)}
+							/>
+						</label>
+					{/if}
 					<div class="flex flex-col gap-2">
 						{#each globalFicha.ficha.magias[i].modificadores as mod, j}
 							<div class="flex flex-row items-center gap-2 font-bold">
