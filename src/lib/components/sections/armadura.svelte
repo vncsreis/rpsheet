@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { getLabel } from '#lib/labels.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
 
 	let selectedArmadura = $state('armadura');
 </script>

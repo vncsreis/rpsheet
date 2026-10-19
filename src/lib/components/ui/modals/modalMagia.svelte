@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { getLabel } from '#lib/labels.ts';
-	import { MODS, type Modificador } from '#lib/modificadores.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
+	import { MODS } from '#lib/modificadores.svelte.ts';
 	import { Icon, Trash, Plus, InformationCircle } from 'svelte-hero-icons';
 
 	let { magia: _magia = {}, magiaIndex = null } = $props();
@@ -48,7 +48,7 @@
 				requerAtivacao: boolean;
 				ativo?: boolean;
 				modificadores: {
-					tipo: Modificador;
+					tipo: string;
 					valor: number;
 				}[];
 				usos?: number;
@@ -71,7 +71,7 @@
 					requerAtivacao: boolean;
 					ativo?: boolean;
 					modificadores: {
-						tipo: Modificador;
+						tipo: string;
 						valor: number;
 					}[];
 					usos?: number;

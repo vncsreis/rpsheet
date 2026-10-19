@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LABELS } from '#lib/labels.ts';
+	import { LABELS } from '#lib/labels.svelte.ts';
 	import { globalFicha } from '#lib/ficha.svelte.ts';
 </script>
 

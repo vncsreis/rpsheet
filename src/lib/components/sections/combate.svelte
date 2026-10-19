@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { getLabel } from '#lib/labels.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
 </script>
 
 <!-- TODO: ver como impedir que PV atual seja maior que total -->

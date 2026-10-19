@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { LABELS } from '#lib/labels.ts';
 	import { globalFicha } from '#lib/ficha.svelte.ts';
 	import ModalInventario from '../ui/modals/modalInventario.svelte';
 	import { Icon, PencilSquare, Trash } from 'svelte-hero-icons';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { toTooltip } from '#lib/modificadores.ts';
+	import { toTooltip } from '#lib/modificadores.svelte.ts';
 </script>
 
 <fieldset

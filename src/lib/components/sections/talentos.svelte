@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { getLabel } from '#lib/labels.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
 	import { ChevronDown, ChevronUp, Icon, PencilSquare, Trash } from 'svelte-hero-icons';
 	import ModalConfirm from '../ui/modals/modalConfirm.svelte';
 	import ModalTalento from '../ui/modals/modalTalento.svelte';

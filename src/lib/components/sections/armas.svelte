@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { getLabel } from '#lib/labels.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
 	import { Icon, Plus, Trash } from 'svelte-hero-icons';
 
 	let selectedArmaIndex = $state(0);

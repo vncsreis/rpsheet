@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
-	import { LABELS } from '#lib/labels.ts';
-	import { MODS, type Modificador } from '#lib/modificadores.ts';
+	import { LABELS } from '#lib/labels.svelte.ts';
+	import { MODS } from '#lib/modificadores.svelte.ts';
 	import { Icon, Plus, Trash } from 'svelte-hero-icons';
 
 	let { status: _status = {}, statusIndex = null } = $props();
@@ -34,7 +34,7 @@
 				nome: string;
 				descr: string;
 				modificadores: {
-					tipo: Modificador;
+					tipo: string;
 					valor: number;
 				}[];
 				requerAtivacao?: boolean;
@@ -50,7 +50,7 @@
 					nome: string;
 					descr: string;
 					modificadores: {
-						tipo: Modificador;
+						tipo: string;
 						valor: number;
 					}[];
 					requerAtivacao?: boolean;

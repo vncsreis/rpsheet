@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { globalFicha } from '#lib/ficha.svelte.ts';
 	import { HABILIDADES, type Habilidade } from '#lib/habilidades.ts';
-	import { getLabel } from '#lib/labels.ts';
+	import { getLabel } from '#lib/labels.svelte.ts';
 
 	let { pericia: _pericia = {}, periciaIndex = null } = $props();
 
