@@ -4,6 +4,8 @@
 	import type { LayoutProps } from './$types';
 	import { globalFicha, NOVA_FICHA } from '#lib/ficha.svelte.ts';
 	import type { Ficha } from '#lib/ficha.interface.ts';
+	import { MODS } from '#lib/modificadores.svelte.ts';
+	import { LABELS } from '#lib/labels.svelte.ts';
 
 	let { children }: LayoutProps = $props();
 
@@ -71,10 +73,24 @@
 	function novaFicha() {
 		globalFicha.ficha = NOVA_FICHA;
 	}
+
+	$effect(() => {
+		if (globalFicha.ficha.pericias) {
+			for (const pericia of globalFicha.ficha.pericias) {
+				if (!MODS.includes(pericia.id)) {
+					MODS.push(pericia.id);
+				}
+				if (!Object.keys(LABELS).includes(pericia.id)) {
+					LABELS[pericia.id] = { name: pericia.nome };
+				}
+			}
+		}
+	});
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>RPSheet{globalFicha.ficha ? ' - ' + globalFicha.ficha.info.nome : ''}</title>
 </svelte:head>
 
 <svelte:window on:beforeunload={handleBeforeUnload} />
