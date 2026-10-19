@@ -19,12 +19,12 @@
 
 			if (penalidadeArmadura > 0) {
 				mods.total -= penalidadeArmadura;
-				tooltipMessage = tooltipMessage + ` Armadura (-${penalidadeArmadura}`;
+				tooltipMessage = tooltipMessage + ` Armadura (-${penalidadeArmadura});`;
 			}
 
 			if (penalidadeEscudo > 0) {
 				mods.total -= penalidadeEscudo;
-				tooltipMessage = tooltipMessage + ` Escudo (-${penalidadeEscudo}`;
+				tooltipMessage = tooltipMessage + ` Escudo (-${penalidadeEscudo});`;
 			}
 		}
 
